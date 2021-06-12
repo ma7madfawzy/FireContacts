@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+        android:layoutAnimation="@anim/layout_scale"
         tools:context=".ui.home.Add">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -59,7 +60,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/container"
-            android:layoutAnimation="@anim/layout_scale"
             snack_error="@{viewModel.model.requestError==null?null:viewModel.model.requestError}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
