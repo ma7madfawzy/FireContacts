@@ -1,0 +1,2 @@
+rootProject.name = "Fire Contacts"
+include ':app'

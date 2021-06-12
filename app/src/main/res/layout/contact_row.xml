@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="dataModel"
+            type="com.example.contacts.data.model.ContactDM" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large"
+        android:clipToPadding="false"
+        android:padding="@dimen/contact_row_card_padding"
+        app:cardCornerRadius="@dimen/medium"
+        app:cardElevation="1dp"
+        tools:context=".ui.home.add_contact.AddContactActivity">
+
+        <com.example.contacts.ui.custom_views.CircularTextView
+            android:id="@+id/icon_iv"
+            firstChar="@{dataModel.contactName}"
+            random_color_background="@{position}"
+            android:layout_width="@dimen/contact_icon_width"
+            android:layout_height="@dimen/contact_icon_width"
+            android:layout_gravity="start|center_vertical"
+            android:layout_margin="@dimen/medium"
+            android:elevation="1dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/large_text_size" />
+
+        <TextView
+            android:id="@+id/contact_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_margin="@dimen/medium"
+            android:clickable="false"
+            android:paddingStart="@dimen/contact_name_margin"
+            android:paddingEnd="@dimen/contact_name_margin"
+            android:text="@{dataModel.contactName}"
+            android:textColor="@color/colorOnSecondary"
+            android:textSize="@dimen/large_text_size" />
+
+        <ImageView
+            android:id="@+id/call_iv"
+            android:layout_width="@dimen/call_icon_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="@dimen/medium"
+            android:src="@drawable/ic_call" />
+        <ImageView
+            android:id="@+id/delete_iv"
+            android:layout_width="@dimen/call_icon_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="@dimen/medium"
+            android:src="@drawable/ic_call" />
+    </androidx.cardview.widget.CardView>
+
+</layout>
