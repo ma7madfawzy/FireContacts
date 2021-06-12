@@ -76,7 +76,7 @@ class AddContactActivity : AppCompatActivity() {
         finish()
         Toast.makeText(
             applicationContext, getString(R.string.contact_added)
-                .replace("*", supportActionBar?.title.toString()), Toast.LENGTH_LONG
+                .replace("*", viewModel.model.contact.toString()), Toast.LENGTH_LONG
         ).show()
     }
 

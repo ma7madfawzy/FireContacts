@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
         FirebaseApp.initializeApp(applicationContext)
         initViews()
         configViewModel()
+        activateSavedTheme()
         refreshData()
     }
 
@@ -46,7 +47,6 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
             .get(HomeActivityViewModel::class.java)
         binding.viewModel = viewModel
         observeFetchContactsResult()
-        activateSavedTheme()
     }
 
     private fun refreshData() {
@@ -55,7 +55,12 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
     }
 
     private fun observeFetchContactsResult() {
-        viewModel.contactData.observe(this, this::updateAdapter)
+        viewModel.contactData.observe(this, this::onDataLoaded)
+    }
+
+    private fun onDataLoaded(dataList: List<ContactDM>?) {
+        updateEmptyDataTV(dataList)
+        updateAdapter(dataList)
     }
 
     private fun updateAdapter(dataList: List<ContactDM>?) {
@@ -63,10 +68,11 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
             adapter.setDataList(it)
             binding.recycler.scheduleLayoutAnimation()
         }
-        if (dataList == null || dataList.isEmpty()) {
-            viewModel.model.dataEmpty = true
-            viewModel.model.messageText = getString(R.string.empty_contacts)
-        }
+    }
+
+    private fun updateEmptyDataTV(dataList: List<ContactDM>?) {
+        viewModel.model.dataEmpty = dataList == null || dataList.isEmpty()
+        viewModel.model.messageText = getString(R.string.empty_contacts)
     }
 
     private fun configRecycler() {
@@ -97,10 +103,9 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
-        if (grantResults.size > 0)
+        if (grantResults.isNotEmpty())
             adapter.onRequestPermissionsResult(requestCode, grantResults)
     }
 

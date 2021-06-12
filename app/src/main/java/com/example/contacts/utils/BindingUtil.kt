@@ -62,7 +62,7 @@ object BindingUtil {
     @JvmStatic
     fun firstChar(view: TextView, text: String?) {
         text?.let {
-            view.text = text.toCharArray()[0].toString()
+            view.text = text.toCharArray()[0].uppercase()
         }
     }
 
