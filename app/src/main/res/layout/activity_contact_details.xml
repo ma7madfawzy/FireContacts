@@ -69,7 +69,6 @@
             android:layout_marginStart="@dimen/large"
             android:layout_marginEnd="@dimen/large"
             android:clipToPadding="false"
-            android:layoutAnimation="@anim/layout_scale"
             android:transitionName="@string/transition"
             app:behavior_overlapTop="@dimen/small_overlap"
             app:cardBackgroundColor="@color/card_color"
