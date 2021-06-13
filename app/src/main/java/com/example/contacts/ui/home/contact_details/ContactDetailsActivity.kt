@@ -77,7 +77,7 @@ class ContactDetailsActivity : AppCompatActivity() {
         finish()
         Toast.makeText(
             applicationContext, getString(R.string.contact_deleted)
-                .replace("*", supportActionBar?.title.toString()), Toast.LENGTH_LONG
+                .replace("*", detailsViewModel.model.dataModel?.contactName.toString()), Toast.LENGTH_LONG
         ).show()
     }
 

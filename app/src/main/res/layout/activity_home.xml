@@ -54,7 +54,7 @@
             android:layout_marginStart="@dimen/large"
             android:layout_marginEnd="@dimen/large"
             android:clickable="false"
-            android:layoutAnimation="@anim/layout_animation"
+            android:layoutAnimation="@anim/slide_in_animation"
             app:behavior_overlapTop="@dimen/overlap"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -94,12 +94,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/white"
             android:gravity="center"
             android:text="@{viewModel.model.messageText}"
             android:textAlignment="center"
-            android:textColor="@color/colorOnSecondary"
-            android:textSize="@dimen/larger_text_size"
+            android:textColor="@color/colorOnPrimary"
+            android:layoutAnimation="@anim/slide_up_animation"
+            android:lineSpacingExtra="@dimen/medium"
+            android:textSize="@dimen/largest_text_size"
             android:textStyle="italic"
             android:visibility="@{viewModel.model.dataEmpty?View.VISIBLE:View.GONE}" />
 
