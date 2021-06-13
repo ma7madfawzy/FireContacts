@@ -26,12 +26,4 @@ class HomeActivityViewModel(private val repository: GetContactsRepository) : Vie
             model.loading = false
         }
     }
-
-    fun onThemeSelected(which: Int, editor: SharedPreferences.Editor) {
-        repository.onThemeSelected(which, editor)
-    }
-
-    fun getSavedTheme(preferences: SharedPreferences): Int {
-        return repository.getSavedTheme(preferences)
-    }
 }

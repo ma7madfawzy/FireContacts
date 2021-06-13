@@ -9,17 +9,7 @@ import com.example.contacts.data.model.Result
  */
 
 class GetContactsRepository(val dataSource: GetContactsDataSource) {
-    private val THEME_TAG = "Theme"
     suspend fun fetchContact(): Result<Any> {
         return dataSource.fetchContact()
     }
-
-    fun onThemeSelected(which: Int, editor: SharedPreferences.Editor) {
-        editor.putInt(THEME_TAG, which).commit()
-    }
-
-    fun getSavedTheme(preferences: SharedPreferences): Int {
-        return preferences.getInt(THEME_TAG, 1)
-    }
-
 }

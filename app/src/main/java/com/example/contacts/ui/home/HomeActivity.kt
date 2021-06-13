@@ -16,12 +16,12 @@ import com.example.contacts.utils.ThemeDialogHandler
 import com.google.firebase.FirebaseApp
 
 
-class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback {
+class HomeActivity : AppCompatActivity() {
 
+    private lateinit var themeHandlerDialog: ThemeDialogHandler
     private lateinit var binding: ActivityHomeBinding
     private lateinit var viewModel: HomeActivityViewModel
     private val adapter: ContactsAdapter = ContactsAdapter(this, ArrayList())
-    private lateinit var themeHandler: ThemeDialogHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
             .get(HomeActivityViewModel::class.java)
         binding.viewModel = viewModel
         observeFetchContactsResult()
-        activateSavedTheme()
+        initThemeHandler()
     }
 
     private fun refreshData() {
@@ -113,23 +113,17 @@ class HomeActivity : AppCompatActivity(), ThemeDialogHandler.ThemePickerCallback
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_theme_changer -> {
-                ThemeDialogHandler(this, this, delegate).chooseThemeDialog()
+                themeHandlerDialog.showThemesPickerDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun activateSavedTheme() {
-        themeHandler = ThemeDialogHandler(this, this, delegate)
-        getMySharedPreferences()?.let { themeHandler.setTheme(null, viewModel.getSavedTheme(it)) }
-
+    private fun initThemeHandler() {
+        themeHandlerDialog = ThemeDialogHandler(this, callback = null, delegate, getMySharedPreferences())
     }
 
     private fun getMySharedPreferences() =
         getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE)
-
-    override fun onThemeSelected(which: Int) {
-        getMySharedPreferences()?.let { it -> viewModel.onThemeSelected(which, editor = it.edit()) }
-    }
 }

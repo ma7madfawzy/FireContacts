@@ -62,6 +62,8 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:borderWidth="0dp"
+            app:rippleColor="@color/colorPrimaryVariant"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@color/colorPrimary"
             android:contentDescription="@string/action_add_contact"
